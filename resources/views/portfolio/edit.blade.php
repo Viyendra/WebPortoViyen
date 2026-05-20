@@ -32,13 +32,15 @@
                         <input type="text" name="title" value="{{ old('title', $project->title) }}" required class="mt-1 block w-full bg-slate-50 border border-slate-200 rounded-md py-2 px-3 text-slate-900">
                     </div>
 
-                    <select name="type" required class="mt-1 block w-full bg-slate-50 border border-slate-200 rounded-md py-2 px-3 text-slate-900">
-                        <option value="machine_learning" {{ $project->type == 'machine_learning' ? 'selected' : '' }}>Predictive / Machine Learning Model</option>
-                        <option value="visualisasi" {{ $project->type == 'visualisasi' ? 'selected' : '' }}>Visualisasi Data</option>
+                    <select name="type" class="..." required>
+                        <option value="machine_learning" {{ $project->type == 'machine_learning' ? 'selected' : '' }}>Machine Learning</option>
+                        <option value="visualisasi" {{ $project->type == 'visualisasi' ? 'selected' : '' }}>Visualisasi</option>
                         <option value="data_analysis_eda" {{ $project->type == 'data_analysis_eda' ? 'selected' : '' }}>Data Analysis & EDA</option>
-                        <option value="web_project" {{ $project->type == 'web_project' ? 'selected' : '' }}>Web Development / Software</option>
-                        <option value="certification" {{ $project->type == 'certification' ? 'selected' : '' }}>Sertifikasi / Kredensial IT</option>
-                        <option value="other" {{ $project->type == 'other' ? 'selected' : '' }}>Proyek Lainnya</option>
+                        <option value="certification" {{ $project->type == 'certification' ? 'selected' : '' }}>Certification</option>
+                        
+                        <option value="experience" {{ $project->type == 'experience' ? 'selected' : '' }}>Experience</option>
+                        
+                        <option value="other" {{ $project->type == 'other' ? 'selected' : '' }}>Other</option>
                     </select>
 
                     <div>
@@ -47,7 +49,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Metodologi & Analisis</label>
+                        <label class="block text-sm font-medium text-gray-700">Metodologi, Analisis dan Detail</label>
                         <textarea name="analysis" rows="6" class="mt-1 block w-full bg-slate-50 border border-slate-200 rounded-md py-2 px-3 text-slate-900">{{ old('analysis', $project->analysis) }}</textarea>
                     </div>
 

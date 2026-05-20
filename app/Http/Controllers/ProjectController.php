@@ -15,7 +15,7 @@ class ProjectController extends Controller
     // 1. Validasi Input
         $request->validate([
             'title' => 'required|string|max:255',
-            'type' => 'required|in:machine_learning,visualisasi,data_analysis_eda,web_project,certification,other',
+            'type' => 'required|in:machine_learning,visualisasi,data_analysis_eda,web_project,certification,experience,other',
             'notebook' => 'nullable|file|max:51200', 
             'certificate' => 'nullable|file|mimes:pdf,png,jpg,jpeg|max:10240'
         ]);
@@ -56,7 +56,7 @@ class ProjectController extends Controller
             }
         }
 
-        if ($request->hasFile('certificate') && $request->type === 'certification') {
+        if ($request->hasFile('certificate') && in_array($request->type, ['certification', 'experience'])) {
             $file = $request->file('certificate');
             $filename = time() . '_cert_' . \Str::slug($request->title) . '.' . $file->getClientOriginalExtension();
             $certPath = $file->storeAs('certificates', $filename, 'public');
@@ -104,7 +104,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'type' => 'required|in:machine_learning,visualisasi,data_analysis_eda,web_project,certification,other',
+            'type' => 'required|in:machine_learning,visualisasi,data_analysis_eda,web_project,certification,experience,other',
             'notebook' => 'nullable|file|max:51200',
             'certificate' => 'nullable|file|mimes:pdf,png,jpg,jpeg|max:10240'
         ]);
@@ -151,7 +151,7 @@ class ProjectController extends Controller
             }
         }
 
-        if ($request->hasFile('certificate') && $request->type === 'certification') {
+        if ($request->hasFile('certificate') && in_array($request->type, ['certification', 'experience'])) {
             $file = $request->file('certificate');
             $filename = time() . '_cert_' . \Str::slug($request->title) . '.' . $file->getClientOriginalExtension();
             $certPath = $file->storeAs('certificates', $filename, 'public');

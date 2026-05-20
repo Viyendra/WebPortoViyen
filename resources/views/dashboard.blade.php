@@ -46,8 +46,9 @@
                             <option value="machine_learning">Predictive / Machine Learning Model</option>
                             <option value="visualisasi">Visualisasi data</option>
                             <option value="data_analysis_eda">Data Analysis & EDA</option>
-                            <option value="web_project">Web Development / Software</option>
                             <option value="certification">Sertifikasi / Kredensial IT</option>
+                            <option value="experience">Experience</option>
+                            <option value="experience">Other</option>
                         </select>
                     </div>
 
@@ -57,7 +58,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Hasil Analisis & Metodologi (Narasi Utama)</label>
+                        <label class="block text-sm font-medium text-gray-700">Hasil Metodologi, Analisis dan Detail</label>
                         <textarea name="analysis" rows="6" class="mt-1 block w-full bg-slate-50 border border-slate-200 rounded-md py-2 px-3 text-slate-900" placeholder="Tuliskan analisis mendalam, insights yang ditemukan, atau fitur-fitur software di sini..."></textarea>
                     </div>
 
