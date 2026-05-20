@@ -289,10 +289,10 @@ Stacked Generalization (Ensemble Stacked) yang menggabungkan kekuatan representa
 semantik dari dua rumpun model Transformer Bahasa Indonesia yang berbeda, dengan
 pengklasifikasi linier regularisasi sebagai Meta-Learner.',
             'cover_image' => NULL,
-            'metadata' => '{"metric_label": null, "metric_value": null, "rendered_html": "rendered/1779285973_internal-selection-case-1-for-satria-data-2026-telkom-university.html", "original_notebook": "notebooks/1779285973_internal-selection-case-1-for-satria-data-2026-telkom-university.ipynb"}',
+            'metadata' => '{"metric_label": "Macro F1 Score", "metric_value": "67,67%", "rendered_html": "rendered/1779285973_internal-selection-case-1-for-satria-data-2026-telkom-university.html", "original_notebook": "notebooks/1779285973_internal-selection-case-1-for-satria-data-2026-telkom-university.ipynb"}',
             'is_private' => 0,
             'created_at' => '2026-05-20 14:06:18',
-            'updated_at' => '2026-05-20 14:06:34',
+            'updated_at' => '2026-05-20 14:37:53',
         ),
         17 => 
         array (
