@@ -43,7 +43,7 @@
             <div class="md:col-span-4 flex justify-center">
                 <div class="relative w-72 h-80 lg:w-full lg:h-96 rounded-[2rem] glass p-2 overflow-hidden group">
                     <img 
-                        src="{{ asset('storage/images/PasFotoFormal_MuhammadViyendra.jpeg') }}" 
+                        src="{{ asset('images/PasFotoFormal_MuhammadViyendra.jpeg') }}" 
                         alt="Muhammad Viyendra" 
                         class="w-full h-full object-cover rounded-[1.5rem] grayscale-[20%] group-hover:grayscale-0 transition duration-500"   
                     >            
