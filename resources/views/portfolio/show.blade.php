@@ -19,7 +19,7 @@
 
     <nav class="fixed w-full top-6 z-50 flex justify-center px-4">
         <div class="glass rounded-full px-8 py-3.5 flex items-center gap-8 text-sm font-medium shadow-2xl">
-            <a href="{{ url('/#projects') }}" class="text-gray-400 hover:text-white transition flex items-center gap-2 border-r border-white/10 pr-8">
+            <a href="{{ url('/#about') }}" class="text-gray-400 hover:text-white transition flex items-center gap-2 border-r border-white/10 pr-8">
                 <span class="text-lg leading-none mb-0.5">&larr;</span> Back to Home
             </a>
             <div class="flex items-center gap-2 text-blue-400 font-bold text-lg">
