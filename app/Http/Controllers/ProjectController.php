@@ -28,7 +28,7 @@ class ProjectController extends Controller
         if ($request->hasFile('notebook') && in_array($request->type, ['machine_learning', 'visualisasi', 'data_analysis_eda'])) {
             $file = $request->file('notebook');
             $filename = time() . '_' . \Str::slug($request->title) . '.ipynb';
-            $notebookPath = $file->storeAs('notebooks', $filename, 'public');
+            $notebookPath = $file->storeAs('notebooks', $filename);
 
             $absoluteNotebookPath = storage_path('app/public/' . $notebookPath);
             $absoluteOutputDir = storage_path('app/public/rendered');
@@ -59,7 +59,7 @@ class ProjectController extends Controller
         if ($request->hasFile('certificate') && in_array($request->type, ['certification', 'experience'])) {
             $file = $request->file('certificate');
             $filename = time() . '_cert_' . \Str::slug($request->title) . '.' . $file->getClientOriginalExtension();
-            $certPath = $file->storeAs('certificates', $filename, 'public');
+            $certPath = $file->storeAs('certificates', $filename);
             
             $metadata['certificate_path'] = $certPath;
         }
@@ -122,7 +122,7 @@ class ProjectController extends Controller
 
             $file = $request->file('notebook');
             $filename = time() . '_' . \Str::slug($request->title) . '.ipynb';
-            $notebookPath = $file->storeAs('notebooks', $filename, 'public');
+            $notebookPath = $file->storeAs('notebooks', $filename);
 
             $absoluteNotebookPath = storage_path('app/public/' . $notebookPath);
             $absoluteOutputDir = storage_path('app/public/rendered');
@@ -154,7 +154,7 @@ class ProjectController extends Controller
         if ($request->hasFile('certificate') && in_array($request->type, ['certification', 'experience'])) {
             $file = $request->file('certificate');
             $filename = time() . '_cert_' . \Str::slug($request->title) . '.' . $file->getClientOriginalExtension();
-            $certPath = $file->storeAs('certificates', $filename, 'public');
+            $certPath = $file->storeAs('certificates', $filename);
             
             $metadata['certificate_path'] = $certPath;
         }

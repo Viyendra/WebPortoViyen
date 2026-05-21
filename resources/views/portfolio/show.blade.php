@@ -150,10 +150,10 @@
                         @php $ext = pathinfo($project->metadata['certificate_path'], PATHINFO_EXTENSION); @endphp
                         
                         @if(in_array(strtolower($ext), ['png', 'jpg', 'jpeg']))
-                            <img src="{{ asset('storage/' . $project->metadata['certificate_path']) }}" alt="{{ $project->title }}" class="max-w-full h-auto mx-auto rounded-xl">
+                            <img src="{{ Storage::url($project->metadata['certificate_path']) }}" alt="{{ $project->title }}" class="max-w-full h-auto mx-auto rounded-xl">
                         @elseif(strtolower($ext) == 'pdf')
                             <iframe 
-                                src="{{ asset('storage/' . $project->metadata['certificate_path']) }}" 
+                                src="{{ Storage::url($project->metadata['certificate_path']) }}" 
                                 style="width: 100%; height: 90vh; min-height: 850px;"
                                 class="rounded-xl" 
                                 frameborder="0">
