@@ -22,18 +22,18 @@ class ProjectsTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 7,
-                'title' => 'Automotive Insurance Claim Severity Prediction: An Advanced Regression Approach - MCF ITB x AXA Mandiri',
-                'slug' => 'automotive-insurance-claim-severity-prediction-an-advanced-regression-approach-mcf-itb-x-axa-mandiri',
+                'title' => 'MCF ITB Data Science Competition: Forecasting Health Insurance Claim Severity',
+                'slug' => 'mcf-itb-data-science-competition-forecasting-health-insurance-claim-severity',
                 'type' => 'machine_learning',
-            'description' => 'Merancang model machine learning regresi untuk memprediksi besaran klaim asuransi kendaraan (claim severity) guna mengoptimalkan manajemen risiko finansial pada ajang MCF ITB Data Science Competition. Melakukan data wrangling yang ekstensif, feature engineering, dan Exploratory Data Analysis (EDA) pada data historis polis dan profil demografi pengemudi. Mengimplementasikan arsitektur ensemble modeling dan evaluasi ketat yang sukses menghasilkan performa prediksi dengan tingkat kesalahan (Mean Absolute Percentage Error / MAPE) hanya sebesar 5.4%, sebuah presisi yang krusial untuk alokasi dana cadangan perusahaan.',
+            'description' => 'Merancang model machine learning regresi untuk memprediksi besaran tagihan klaim asuransi kesehatan (claim severity) guna mengoptimalkan manajemen risiko finansial pada ajang MCF ITB Data Science Competition. Melakukan eksplorasi data, feature engineering, dan prapemrosesan pada riwayat data medis dan profil demografi pemegang polis. Berhasil mengimplementasikan arsitektur ensemble regression yang divalidasi dengan ketat, mencapai performa prediksi dengan tingkat kesalahan (Mean Absolute Percentage Error / MAPE) hanya sebesar 5.4%, sebuah presisi yang krusial untuk manajemen alokasi dana cadangan asuransi.',
                 'analysis' => 'Tentang Proyek:
-Proyek ini merupakan penyelesaian dari studi kasus Mathematics Challenge Festival (MCF) pada ITB Data Science Competition. Tantangan bisnis utamanya adalah bagaimana perusahaan asuransi dapat memprediksi nilai total klaim (severity) yang diajukan oleh pemegang polis otomotif secara akurat. Model prediktif yang andal sangat krusial di industri ini untuk memastikan perusahaan tidak mengalami kerugian akibat under-pricing premi, sekaligus menjaga ketersediaan dana cadangan (reserve allocation) yang proporsional terhadap profil risiko nasabah.
+Proyek ini merupakan solusi pemodelan analitik untuk memecahkan studi kasus Mega Capital Finance (MCF) pada ITB Data Science Competition. Tantangan bisnis utamanya berpusat pada industri asuransi kesehatan: merancang model yang mampu memprediksi secara akurat estimasi nilai tagihan klaim medis yang akan diajukan oleh pemegang polis. Akurasi prediksi ini sangat vital bagi perusahaan asuransi (Insurtech) untuk mencegah risiko under-pricing premi asuransi kesehatan, memprediksi inflasi biaya medis, serta memastikan ketersediaan dana cadangan (reserve allocation) yang aman dan proporsional.
 
 Alur Kerja & Metodologi Teknis:
-1. Exploratory Data Analysis (EDA) & Preprocessing: Melakukan pembedahan data historis polis asuransi yang mencakup spesifikasi kendaraan, demografi pengemudi, dan rekam jejak klaim. Proses ini mencakup penanganan missing values, identifikasi outliers pada data finansial, serta analisis korelasi untuk menyeleksi fitur-fitur prediktor yang paling relevan.
-2. Feature Engineering Pipeline: Mentransformasi data mentah menjadi format yang siap dilatih oleh mesin, menggunakan teknik pengkodean untuk variabel kategorikal (Label Encoding/One-Hot Encoding) dan standardisasi untuk variabel numerik.
-3. Advanced Regression & Ensemble Modeling: Mengeksplorasi dan melatih berbagai algoritma regresi untuk memetakan hubungan non-linear antara profil risiko dan estimasi kerugian. Fokus utama pemodelan terletak pada pemanfaatan arsitektur stacked ensemble models untuk menekan variansi prediksi dan meminimalisasi bias estimasi.
-4. High-Precision Model Evaluation: Model dievaluasi menggunakan metrik Mean Absolute Percentage Error (MAPE). Hasil akhir menunjukkan pencapaian yang luar biasa dengan akurasi prediksi mencapai 5.4% MAPE, membuktikan bahwa algoritma yang dirancang sangat layak (production-ready) untuk diimplementasikan dalam skenario bisnis nyata.
+1. Exploratory Data Analysis (EDA) & Preprocessing: Melakukan pembedahan mendalam terhadap data historis klaim asuransi kesehatan, yang mencakup profil demografi pasien, jenis perawatan, dan riwayat klaim sebelumnya. Prapemrosesan melibatkan penanganan missing values serta identifikasi anomali/ outliers pada lonjakan biaya perawatan medis.
+2. Feature Engineering Pipeline: Mentransformasi data rekam medis mentah menjadi format numerik yang terstandardisasi. Mengaplikasikan teknik Label Encoding dan One-Hot Encoding pada variabel kategorikal (seperti jenis polis atau diagnosis klaim), serta melakukan feature scaling untuk menstabilkan distribusi data sebelum proses pelatihan.
+3. Advanced Regression Modeling: Mengeksplorasi dan melatih serangkaian algoritma regresi dan metode ensemble tingkat lanjut. Tujuan utamanya adalah untuk memetakan hubungan kompleks dan non-linear antara profil risiko kesehatan nasabah dengan estimasi nominal kerugian finansial perusahaan.
+4. High-Precision Model Evaluation: Mengevaluasi model menggunakan metrik Mean Absolute Percentage Error (MAPE) guna memvalidasi margin kesalahan estimasi. Hasil akhir kompetisi menunjukkan model ini sukses meraih akurasi dengan tingkat error yang sangat rendah, yakni 5.4% MAPE, menjadikannya sebagai arsitektur yang sangat stabil dan siap divalidasi untuk implementasi bisnis nyata.
 
 Teknologi & Keahlian Terapan:
 1. Bahasa Pemrograman: Python
@@ -44,7 +44,7 @@ Teknologi & Keahlian Terapan:
                 'metadata' => '{"metric_label": "MAPE", "metric_value": "5.4%", "rendered_html": "rendered/1779283101_prediksi-tren-klaim-asuransi-mcf-itb-x-axa-mandiri.html", "original_notebook": "notebooks/1779283101_prediksi-tren-klaim-asuransi-mcf-itb-x-axa-mandiri.ipynb"}',
                 'is_private' => 0,
                 'created_at' => '2026-05-20 13:18:28',
-                'updated_at' => '2026-05-21 09:36:08',
+                'updated_at' => '2026-05-21 10:33:26',
             ),
             1 => 
             array (
