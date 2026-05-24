@@ -422,10 +422,10 @@ Tanggung Jawab & Kontribusi Utama:
 2. Financial Feasibility & Budgeting: Menganalisis dan menyusun proyeksi kelayakan finansial yang ketat. Mengoptimalkan perencanaan dana hibah dengan memastikan Cost-Benefit Ratio yang proporsional untuk implementasi teknologi di area pedesaan.
 3. Procurement & Viability Assurance: Merumuskan alur pengadaan (procurement) komponen perangkat keras IoT secara komprehensif. Pemilihan vendor dan spesifikasi komponen dikurasi secara strategis untuk mencegah pembengkakan anggaran (over-budgeting) serta menjamin sistem memiliki ketahanan hidup (viability) dan kemudahan perawatan (maintainability) jangka panjang oleh warga desa.',
     'cover_image' => NULL,
-    'metadata' => '{"metric_label": null, "metric_value": null}',
+    'metadata' => '{"metric_label": null, "metric_value": null, "certificate_path": "certificates/1779611862_cert_iot-system-designer-project-planner-ppk-ormawa-kemdiktisaintek.pdf"}',
     'is_private' => 0,
     'created_at' => '2026-05-21 10:07:42',
-    'updated_at' => '2026-05-21 10:08:01',
+    'updated_at' => '2026-05-24 08:37:42',
 ),
 ));
         
