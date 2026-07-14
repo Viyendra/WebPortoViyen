@@ -28,11 +28,13 @@ function startPhpServer() {
             const router = path.resolve(docroot, 'index.php');
             const phpBinDir = path.dirname(phpBin);
             const phpLibDir = path.resolve(phpBinDir, '../lib');
+            const phpModulesDir = path.resolve(phpBinDir, 'modules');
 
-            console.log(`[Proxy] Spawning PHP: ${phpBin} -c ${phpIni} -S 127.0.0.1:${PHP_PORT} -t ${docroot} ${router}`);
+            console.log(`[Proxy] Spawning PHP: ${phpBin} -c ${phpIni} -d extension_dir=${phpModulesDir} -S 127.0.0.1:${PHP_PORT} -t ${docroot} ${router}`);
 
             phpServerProcess = spawn(phpBin, [
                 '-c', phpIni,
+                '-d', `extension_dir=${phpModulesDir}`,
                 '-S', `127.0.0.1:${PHP_PORT}`,
                 '-t', docroot,
                 router

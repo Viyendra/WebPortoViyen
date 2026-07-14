@@ -38,7 +38,19 @@ try {
         }
     });
     console.log('Composer dependencies installed successfully!');
+
+    // 3. Run Package Discover to pre-generate config files in bootstrap/cache/
+    console.log('Running php artisan package:discover...');
+    execSync(`"${phpBin}" -d extension_dir="${phpModulesDir}" artisan package:discover`, {
+        stdio: 'inherit',
+        env: {
+            ...process.env,
+            PATH: `${phpBinDir}:${process.env.PATH}`,
+            LD_LIBRARY_PATH: `${phpLibDir}:/usr/lib64:/lib64:${process.env.LD_LIBRARY_PATH || ''}`
+        }
+    });
+    console.log('Package discovery completed successfully!');
 } catch (err) {
-    console.error('Failed to install Composer dependencies:', err.message);
+    console.error('Failed during build process:', err.message);
     process.exit(1);
 }
