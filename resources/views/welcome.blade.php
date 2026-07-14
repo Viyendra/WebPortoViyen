@@ -285,6 +285,93 @@
         </div>
     </div>
 
+    <!-- Standalone Preloader Script (runs before Three.js, never blocked by 3D errors) -->
+    <script>
+    (function() {
+        // ponytail: preloader extracted to standalone script to avoid Three.js crash cascade
+        var statusTexts = [
+            "INITIALIZING MACHINE LEARNING CORES...",
+            "CONNECTING TO NEURAL PLEXUS GRAPH...",
+            "LOADING TENSORFLOW KERNELS...",
+            "GENERATING HOLOGRAPHIC CREDENTIALS...",
+            "TUNING ENSEMBLE REGRESSORS...",
+            "PIPELINE COMPILED. SYSTEM ONLINE."
+        ];
+
+        var loaderPercent = document.getElementById('loader-percent');
+        var loaderBar = document.getElementById('loader-bar');
+        var loaderStatus = document.getElementById('loader-status');
+        var preloader = document.getElementById('preloader');
+        var enterBtn = document.getElementById('enter-btn');
+        var loaderProgressGroup = document.getElementById('loader-progress-group');
+        var loaderBarContainer = document.getElementById('loader-bar-container');
+        var flashOverlay = document.getElementById('flash-overlay');
+        var ringOuter = document.getElementById('ring-outer');
+        var ringInner = document.getElementById('ring-inner');
+
+        var percent = 0;
+        var statusIndex = 0;
+
+        var preloaderInterval = setInterval(function() {
+            percent += Math.floor(Math.random() * 4) + 1;
+            if (percent >= 100) {
+                percent = 100;
+                clearInterval(preloaderInterval);
+                setTimeout(function() {
+                    loaderStatus.textContent = "[ CONNECTION READY. SECURE LINK ESTABLISHED ]";
+                    loaderStatus.classList.remove('text-blue-400/70');
+                    loaderStatus.classList.add('text-emerald-400', 'font-bold');
+                    loaderProgressGroup.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                    loaderBarContainer.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                    setTimeout(function() {
+                        enterBtn.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                        enterBtn.classList.add('opacity-100', 'scale-100');
+                    }, 300);
+                }, 400);
+            }
+            loaderPercent.textContent = String(percent).padStart(2, '0');
+            loaderBar.style.width = percent + '%';
+            var textSection = Math.floor(percent / (100 / statusTexts.length));
+            if (textSection !== statusIndex && textSection < statusTexts.length) {
+                statusIndex = textSection;
+                loaderStatus.textContent = statusTexts[statusIndex];
+            }
+        }, 22);
+
+        // Button hover micro-interactions
+        enterBtn.addEventListener('mouseenter', function() {
+            ringOuter.style.animationDuration = '6s';
+            ringInner.style.animationDuration = '3s';
+            ringOuter.style.borderColor = 'rgba(59, 130, 246, 0.7)';
+            ringInner.style.borderColor = 'rgba(99, 102, 241, 0.4)';
+        });
+        enterBtn.addEventListener('mouseleave', function() {
+            ringOuter.style.animationDuration = '20s';
+            ringInner.style.animationDuration = '10s';
+            ringOuter.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+            ringInner.style.borderColor = 'rgba(99, 102, 241, 0.2)';
+        });
+
+        // Global callback — filled by main script once observer is ready
+        window.__preloaderEnter = null;
+
+        enterBtn.addEventListener('click', function() {
+            flashOverlay.style.opacity = '0.85';
+            setTimeout(function() { flashOverlay.style.opacity = '0'; }, 150);
+            preloader.classList.add('fade-out');
+            document.body.classList.remove('loading');
+            document.documentElement.classList.add('loaded');
+            // Delegate to main script if ready, otherwise just reveal all
+            if (typeof window.__preloaderEnter === 'function') {
+                window.__preloaderEnter();
+            } else {
+                // Fallback: reveal all .reveal elements directly
+                document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('active'); });
+            }
+        });
+    })();
+    </script>
+
     <!-- Interactive click flash overlay -->
     <div id="flash-overlay" class="fixed inset-0 bg-white z-[10000] pointer-events-none opacity-0 transition-opacity duration-150"></div>
 
@@ -913,6 +1000,7 @@
     
     <!-- Custom 3D Background Script & Reveal Animation -->
     <script>
+    try {
         // Three.js Network Plexus Background (Neural Network Theme)
         const canvas = document.getElementById('webgl-canvas');
         const scene = new THREE.Scene();
@@ -2535,94 +2623,17 @@
             }
         });
 
-        // Futuristic AI Preloader Core Animation Logic
-        const statusTexts = [
-            "INITIALIZING MACHINE LEARNING CORES...",
-            "CONNECTING TO NEURAL PLEXUS GRAPH...",
-            "LOADING TENSORFLOW KERNELS...",
-            "GENERATING HOLOGRAPHIC CREDENTIALS...",
-            "TUNING ENSEMBLE REGRESSORS...",
-            "PIPELINE COMPILED. SYSTEM ONLINE."
-        ];
-
-        const loaderPercent = document.getElementById('loader-percent');
-        const loaderBar = document.getElementById('loader-bar');
-        const loaderStatus = document.getElementById('loader-status');
-        const preloader = document.getElementById('preloader');
-        const enterBtn = document.getElementById('enter-btn');
-        const loaderProgressGroup = document.getElementById('loader-progress-group');
-        const loaderBarContainer = document.getElementById('loader-bar-container');
-        const flashOverlay = document.getElementById('flash-overlay');
-
-        const ringOuter = document.getElementById('ring-outer');
-        const ringInner = document.getElementById('ring-inner');
-        
-        let percent = 0;
-        let statusIndex = 0;
-
-        // Animate loader simulation
-        const preloaderInterval = setInterval(() => {
-            percent += Math.floor(Math.random() * 4) + 1; // random organic increments
-            if (percent >= 100) {
-                percent = 100;
-                clearInterval(preloaderInterval);
-                
-                // Done loading triggers transition to Interactive Enter Button
-                setTimeout(() => {
-                    loaderStatus.textContent = "[ CONNECTION READY. SECURE LINK ESTABLISHED ]";
-                    loaderStatus.classList.remove('text-blue-400/70');
-                    loaderStatus.classList.add('text-emerald-400', 'font-bold');
-
-                    loaderProgressGroup.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
-                    loaderBarContainer.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
-
-                    setTimeout(() => {
-                        enterBtn.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
-                        enterBtn.classList.add('opacity-100', 'scale-100');
-                    }, 300);
-                }, 400);
-            }
-            
-            loaderPercent.textContent = String(percent).padStart(2, '0');
-            loaderBar.style.width = percent + '%';
-
-            const textSection = Math.floor(percent / (100 / statusTexts.length));
-            if (textSection !== statusIndex && textSection < statusTexts.length) {
-                statusIndex = textSection;
-                loaderStatus.textContent = statusTexts[statusIndex];
-            }
-        }, 22);
-
-        // Preloader Button Micro-Interactions
-        enterBtn.addEventListener('mouseenter', () => {
-            ringOuter.style.animationDuration = '6s';
-            ringInner.style.animationDuration = '3s';
-            ringOuter.style.borderColor = 'rgba(59, 130, 246, 0.7)';
-            ringInner.style.borderColor = 'rgba(99, 102, 241, 0.4)';
-        });
-
-        enterBtn.addEventListener('mouseleave', () => {
-            ringOuter.style.animationDuration = '20s';
-            ringInner.style.animationDuration = '10s';
-            ringOuter.style.borderColor = 'rgba(59, 130, 246, 0.3)';
-            ringInner.style.borderColor = 'rgba(99, 102, 241, 0.2)';
-        });
-
-        enterBtn.addEventListener('click', () => {
-            flashOverlay.style.opacity = '0.85';
-            setTimeout(() => {
-                flashOverlay.style.opacity = '0';
-            }, 150);
-
-            preloader.classList.add('fade-out');
+        // Wire up preloader enter callback to use Three.js intro + reveal observer
+        window.__preloaderEnter = function() {
             introTriggered = true;
-
-            setTimeout(() => {
-                document.body.classList.remove('loading');
-                document.documentElement.classList.add('loaded');
-                revealElements.forEach(el => observer.observe(el));
-            }, 100);
-        });
+            revealElements.forEach(el => observer.observe(el));
+        };
+    } catch(e) {
+        // ponytail: Three.js or 3D code failed — preloader still works independently
+        console.warn('[3D] Three.js initialization failed:', e);
+        // Ensure reveal elements are visible even without 3D
+        document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('active'); });
+    }
     </script>
 </body>
 </html>
