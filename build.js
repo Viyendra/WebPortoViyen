@@ -28,7 +28,7 @@ try {
     fs.chmodSync(composerBin, '755');
 
     // Run composer install
-    execSync(`"${phpBin}" -d extension_dir="${phpModulesDir}" "${composerBin}" install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs`, {
+    execSync(`"${phpBin}" -d extension_dir="${phpModulesDir}" "${composerBin}" install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs --no-scripts`, {
         stdio: 'inherit',
         env: {
             ...process.env,
