@@ -8,6 +8,21 @@
     { "src": "/build/(.*)", "dest": "/public/build/$1" },
     { "src": "/(.*)", "dest": "/api/index.js" }
   ],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": [
+        "app/**",
+        "bootstrap/**",
+        "config/**",
+        "database/**",
+        "public/**",
+        "resources/**",
+        "routes/**",
+        "storage/**",
+        "vendor/**"
+      ]
+    }
+  },
   "env": {
     "VERCEL": "1",
     "APP_ENV": "production",
