@@ -30,29 +30,9 @@ class ProjectController extends Controller
             $filename = time() . '_' . \Str::slug($request->title) . '.ipynb';
             $notebookPath = $file->storeAs('notebooks', $filename, 'public');
 
-            $absoluteNotebookPath = storage_path('app/public/' . $notebookPath);
-            $absoluteOutputDir = storage_path('app/public/rendered');
-            
-            if (!file_exists($absoluteOutputDir)) {
-                mkdir($absoluteOutputDir, 0755, true);
-            }
-
-            $pythonPath = 'C:\Users\viyendra\AppData\Local\Programs\Python\Python313\python.exe';
-            $command = "\"{$pythonPath}\" -m jupyter nbconvert --to html \"{$absoluteNotebookPath}\" --output-dir=\"{$absoluteOutputDir}\"";
-            $result = \Illuminate\Support\Facades\Process::env([
-                'SystemRoot'  => 'C:\\Windows',
-                'PATH'        => getenv('PATH'),
-                'USERPROFILE' => 'C:\\Users\\viyendra',
-                'HOMEDRIVE'   => 'C:',
-                'HOMEPATH'    => '\\Users\\viyendra',
-            ])->run($command);
-
-            if ($result->successful()) {
-                $htmlFilename = str_replace('.ipynb', '.html', $filename);
-                $metadata['original_notebook'] = 'notebooks/' . $filename;
-                $metadata['rendered_html'] = 'rendered/' . $htmlFilename;
-            } else {
-                return back()->with('error', 'Gagal merender file Jupyter: ' . $result->errorOutput());
+            $error = $this->renderNotebook($filename, $notebookPath, $metadata);
+            if ($error) {
+                return back()->with('error', 'Gagal merender file Jupyter: ' . $error);
             }
         }
 
@@ -124,30 +104,9 @@ class ProjectController extends Controller
             $filename = time() . '_' . \Str::slug($request->title) . '.ipynb';
             $notebookPath = $file->storeAs('notebooks', $filename, 'public');
 
-            $absoluteNotebookPath = storage_path('app/public/' . $notebookPath);
-            $absoluteOutputDir = storage_path('app/public/rendered');
-            
-            if (!file_exists($absoluteOutputDir)) {
-                mkdir($absoluteOutputDir, 0755, true);
-            }
-
-            $pythonPath = 'C:\Users\viyendra\AppData\Local\Programs\Python\Python313\python.exe';
-            $command = "\"{$pythonPath}\" -m jupyter nbconvert --to html \"{$absoluteNotebookPath}\" --output-dir=\"{$absoluteOutputDir}\"";
-            
-            $result = \Illuminate\Support\Facades\Process::env([
-                'SystemRoot'  => 'C:\\Windows',
-                'PATH'        => getenv('PATH'),
-                'USERPROFILE' => 'C:\\Users\\viyendra',
-                'HOMEDRIVE'   => 'C:',
-                'HOMEPATH'    => '\\Users\\viyendra',
-            ])->run($command);
-
-            if ($result->successful()) {
-                $htmlFilename = str_replace('.ipynb', '.html', $filename);
-                $metadata['original_notebook'] = 'notebooks/' . $filename;
-                $metadata['rendered_html'] = 'rendered/' . $htmlFilename;
-            } else {
-                return back()->with('error', 'Gagal merender file Jupyter: ' . $result->errorOutput());
+            $error = $this->renderNotebook($filename, $notebookPath, $metadata);
+            if ($error) {
+                return back()->with('error', 'Gagal merender file Jupyter: ' . $error);
             }
         }
 
@@ -169,5 +128,55 @@ class ProjectController extends Controller
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Data portofolio berhasil diperbarui!');
+    }
+
+    /**
+     * Renders a Jupyter Notebook file to HTML using nbconvert.
+     */
+    private function renderNotebook($filename, $notebookPath, &$metadata)
+    {
+        $absoluteNotebookPath = storage_path('app/public/' . $notebookPath);
+        $absoluteOutputDir = storage_path('app/public/rendered');
+        
+        if (!file_exists($absoluteOutputDir)) {
+            mkdir($absoluteOutputDir, 0755, true);
+        }
+
+        $pythonPath = config('services.python.path');
+        
+        // Fallback checks for absolute path or empty path
+        if (empty($pythonPath)) {
+            $pythonPath = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' ? 'python' : 'python3';
+        } elseif ((str_contains($pythonPath, '/') || str_contains($pythonPath, '\\')) && !file_exists($pythonPath)) {
+            $pythonPath = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' ? 'python' : 'python3';
+        }
+
+        $command = "\"{$pythonPath}\" -m jupyter nbconvert --to html \"{$absoluteNotebookPath}\" --output-dir=\"{$absoluteOutputDir}\"";
+        
+        $processEnv = [];
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $processEnv = [
+                'SystemRoot'  => getenv('SystemRoot') ?: 'C:\\Windows',
+                'PATH'        => getenv('PATH'),
+                'USERPROFILE' => getenv('USERPROFILE') ?: env('USERPROFILE', 'C:\\Users\\viyendra'),
+                'HOMEDRIVE'   => getenv('HOMEDRIVE') ?: 'C:',
+                'HOMEPATH'    => getenv('HOMEPATH') ?: '\\Users\\viyendra',
+            ];
+        } else {
+            $processEnv = [
+                'PATH' => getenv('PATH'),
+            ];
+        }
+
+        $result = \Illuminate\Support\Facades\Process::env($processEnv)->run($command);
+
+        if ($result->successful()) {
+            $htmlFilename = str_replace('.ipynb', '.html', $filename);
+            $metadata['original_notebook'] = 'notebooks/' . $filename;
+            $metadata['rendered_html'] = 'rendered/' . $htmlFilename;
+            return null;
+        }
+
+        return $result->errorOutput();
     }
 }

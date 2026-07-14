@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'python' => [
+        'path' => env('PYTHON_PATH', 'python'),
+    ],
+
 ];
+

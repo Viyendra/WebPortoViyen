@@ -427,6 +427,30 @@ Tanggung Jawab & Kontribusi Utama:
     'created_at' => '2026-05-21 10:07:42',
     'updated_at' => '2026-05-24 08:37:42',
 ),
+23 => 
+array (
+    'id' => 34,
+    'title' => 'Smart Waste Classification: A Super-Ensemble Stacking & Soft Blending Approach',
+    'slug' => 'smart-waste-classification-a-super-ensemble-stacking-soft-blending-approach',
+    'type' => 'machine_learning',
+'description' => 'Proyek ini mendokumentasikan keseluruhan siklus pengembangan model Computer Vision untuk memecahkan kasus klasifikasi sampah pada tahap Penyisihan Satria Data BDC 2026. Tantangan utama yang dihadapi adalah risiko kebocoran data (data leakage) akibat duplikasi file, tingginya bias latar belakang putih pada kelas daur ulang, serta rasio ketidakseimbangan kelas yang ekstrem (kelas \'Electronic\' sebagai minoritas mutlak). Untuk mengatasi keterbatasan model tunggal dalam menangkap detail objek, proyek ini mengimplementasikan arsitektur Super-Ensemble (Stacking & Soft Blending) yang mengorkestrasi enam model Deep Learning secara simultan untuk menghasilkan prediksi yang tangguh dan akurat.',
+    'analysis' => 'Fitur & Metodologi Utama:
+1. Pencegahan Kebocoran Data (Data Leakage): Menggunakan algoritma hashing MD5 untuk memindai dan membersihkan duplikat gambar biner secara paralel, memastikan bahwa evaluasi Cross-Validation (CV) benar-benar bersih dan bebas dari kebocoran target.
+2. Penanganan Bias & Ketidakseimbangan Kelas: Membangun data pipeline dengan injeksi Gaussian Noise untuk mencegah model menghafal latar belakang putih. Selain itu, Weighted Cross-Entropy Loss dengan penalti bobot dinamis diterapkan agar model tetap sensitif dalam memprediksi wawasan di kelas minoritas.
+3. Dual-Resolution Super-Ensemble: Menggabungkan tiga model beresolusi kecil (224x224: EfficientNet-B0, ConvNeXt-Tiny, ViT-224) untuk menangkap siluet objek, dan tiga model beresolusi besar (384x384: EfficientNet-B3, ConvNeXt-Large, ViT-384) untuk mengekstrak tekstur detail objek beresolusi tinggi.
+4. Meta-Learner Calibration & Robust Evaluation: Menerapkan algoritma Logistic Regression (dengan regularisasi L2) sebagai meta-learner untuk mencari batas keputusan dari matriks probabilitas 30 checkpoint model dasar. Dilengkapi dengan Test-Time Augmentation (TTA), pendekatan ini berhasil mencatatkan Macro-Averaged F1-Score validasi sebesar ~97% dengan standar deviasi yang sangat stabil (<0.70%).
+
+Teknologi yang Digunakan:
+1. Bahasa Pemrograman: Python
+2. Deep Learning Frameworks: PyTorch, PyTorch Image Models (timm)
+3. Machine Learning & Modeling: Scikit-learn (LogisticRegression, StratifiedKFold, Classification Report)
+4. Data Processing & Augmentation: OpenCV, Pillow (PIL), Albumentations, Pandas, NumPy, Matplotlib',
+        'cover_image' => NULL,
+        'metadata' => '{"metric_label": "Macro F1 Score", "metric_value": "97-98%", "rendered_html": "rendered/1783995122_smart-waste-classification-a-super-ensemble-stacking-soft-blending-approach.html", "original_notebook": "notebooks/1783995122_smart-waste-classification-a-super-ensemble-stacking-soft-blending-approach.ipynb"}',
+        'is_private' => 0,
+        'created_at' => '2026-07-14 02:12:09',
+        'updated_at' => '2026-07-14 02:12:09',
+    ),
 ));
         
         
