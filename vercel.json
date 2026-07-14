@@ -4,22 +4,17 @@
   "outputDirectory": "public",
   "buildCommand": "npm run build",
   "functions": {
-    "api/index.php": {
-      "runtime": "vercel-php@0.9.0",
-      "includeFiles": "../{app,bootstrap,config,database,public,resources,routes,storage,vendor}/**"
-    },
     "api/test.php": {
-      "runtime": "vercel-php@0.9.0",
-      "includeFiles": "../{app,bootstrap,config,vendor}/**"
+      "runtime": "vercel-php@0.7.2"
+    },
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.2",
+      "includeFiles": "../{app,bootstrap,config,database,public,resources,routes,storage,vendor}/**"
     }
   },
   "routes": [
     { "src": "/api/test", "dest": "/api/test.php" },
     { "src": "/build/(.*)", "dest": "/public/build/$1" },
-    { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
-    { "src": "/(css|js|images|fonts)/(.*)", "dest": "/public/$1/$2" },
-    { "src": "/favicon.ico", "dest": "/public/favicon.ico" },
-    { "src": "/robots.txt", "dest": "/public/robots.txt" },
     { "src": "/(.*)", "dest": "/api/index.php" }
   ],
   "env": {
