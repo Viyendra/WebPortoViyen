@@ -10,17 +10,7 @@
   ],
   "functions": {
     "api/index.js": {
-      "includeFiles": [
-        "app/**",
-        "bootstrap/**",
-        "config/**",
-        "database/**",
-        "public/**",
-        "resources/**",
-        "routes/**",
-        "storage/**",
-        "vendor/**"
-      ]
+      "includeFiles": "{app,bootstrap,config,database,public,resources,routes,storage,vendor}/**"
     }
   },
   "env": {
