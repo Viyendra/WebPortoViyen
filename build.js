@@ -21,13 +21,14 @@ try {
     const composerBin = libphp.getComposer();
     const phpBinDir = path.dirname(phpBin);
     const phpLibDir = path.resolve(phpBinDir, '../lib');
+    const phpModulesDir = path.resolve(phpBinDir, 'modules');
 
     // Chmod php & composer to be executable
     fs.chmodSync(phpBin, '755');
     fs.chmodSync(composerBin, '755');
 
     // Run composer install
-    execSync(`"${phpBin}" "${composerBin}" install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs`, {
+    execSync(`"${phpBin}" -d extension_dir="${phpModulesDir}" "${composerBin}" install --no-dev --optimize-autoloader --no-interaction --ignore-platform-reqs`, {
         stdio: 'inherit',
         env: {
             ...process.env,
