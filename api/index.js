@@ -2,9 +2,36 @@ const { spawn } = require('child_process');
 const http = require('http');
 const path = require('path');
 const fs = require('fs');
+const net = require('net');
 
 let phpServerProcess = null;
 const PHP_PORT = 8000;
+
+function waitForPort(port, timeoutMs = 3000) {
+    return new Promise((resolve, reject) => {
+        const startTime = Date.now();
+
+        function check() {
+            const socket = new net.Socket();
+            socket.setTimeout(150);
+            socket.on('connect', () => {
+                socket.destroy();
+                resolve();
+            });
+            socket.on('error', () => {
+                socket.destroy();
+                if (Date.now() - startTime < timeoutMs) {
+                    setTimeout(check, 50);
+                } else {
+                    reject(new Error(`Timeout waiting for port ${port} to open`));
+                }
+            });
+            socket.connect(port, '127.0.0.1');
+        }
+
+        check();
+    });
+}
 
 function startPhpServer() {
     return new Promise((resolve, reject) => {
@@ -49,10 +76,10 @@ function startPhpServer() {
                 stdio: 'inherit'
             });
 
-            // Wait a moment for the port to open
-            setTimeout(() => {
-                resolve();
-            }, 600);
+            // Wait for the port to open using polling
+            waitForPort(PHP_PORT, 3000)
+                .then(resolve)
+                .catch(reject);
 
             phpServerProcess.on('error', (err) => {
                 console.error('[Proxy] PHP process error:', err);
