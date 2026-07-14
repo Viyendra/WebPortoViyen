@@ -1,25 +1,46 @@
 <?php
 
-// Set writable paths for Vercel's read-only filesystem
-// Vercel only allows writing to /tmp
-$_ENV['VIEW_COMPILED_PATH'] = '/tmp/views';
-$_ENV['LOG_CHANNEL'] = 'stderr';
-$_ENV['SESSION_DRIVER'] = 'cookie';
-$_ENV['CACHE_DRIVER'] = 'array';
+// ============================================================
+// Vercel Serverless Entry Point for Laravel
+// ============================================================
+// Vercel's filesystem is READ-ONLY except /tmp.
+// We must redirect all writable paths to /tmp BEFORE Laravel boots.
 
-// Create required tmp directories
-if (!is_dir('/tmp/views')) {
-    mkdir('/tmp/views', 0755, true);
-}
-if (!is_dir('/tmp/logs')) {
-    mkdir('/tmp/logs', 0755, true);
-}
-if (!is_dir('/tmp/cache')) {
-    mkdir('/tmp/cache', 0755, true);
-}
-if (!is_dir('/tmp/sessions')) {
-    mkdir('/tmp/sessions', 0755, true);
+// 1. Set environment variables using ALL methods Laravel checks
+$vercelEnv = [
+    'VIEW_COMPILED_PATH' => '/tmp/views',
+    'LOG_CHANNEL'        => 'stderr',
+    'SESSION_DRIVER'     => 'cookie',
+    'CACHE_DRIVER'       => 'array',
+    'CACHE_STORE'        => 'array',
+];
+
+foreach ($vercelEnv as $key => $value) {
+    $_ENV[$key] = $value;
+    $_SERVER[$key] = $value;
+    putenv("$key=$value");
 }
 
-// Forward to Laravel's public/index.php
+// 2. Create all required writable directories in /tmp
+$tmpDirs = [
+    '/tmp/views',
+    '/tmp/logs',
+    '/tmp/cache',
+    '/tmp/sessions',
+    '/tmp/storage/framework/views',
+    '/tmp/storage/framework/cache',
+    '/tmp/storage/framework/cache/data',
+    '/tmp/storage/framework/sessions',
+    '/tmp/storage/framework/testing',
+    '/tmp/storage/logs',
+    '/tmp/storage/app',
+];
+
+foreach ($tmpDirs as $dir) {
+    if (!is_dir($dir)) {
+        mkdir($dir, 0755, true);
+    }
+}
+
+// 3. Forward request to Laravel's public/index.php
 require __DIR__ . '/../public/index.php';
