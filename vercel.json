@@ -3,21 +3,10 @@
   "framework": null,
   "outputDirectory": "public",
   "buildCommand": "npm run build",
-  "build": {
-    "env": {
-      "NOW_PHP_DEBUG": "1"
-    }
-  },
-  "builds": [
-    {
-      "src": "api/*.php",
-      "use": "vercel-php@0.9.0"
-    }
-  ],
   "routes": [
-    { "src": "/api/test", "dest": "/api/test.php" },
+    { "src": "/api/test", "dest": "/api/index.js" },
     { "src": "/build/(.*)", "dest": "/public/build/$1" },
-    { "src": "/(.*)", "dest": "/api/index.php" }
+    { "src": "/(.*)", "dest": "/api/index.js" }
   ],
   "env": {
     "VERCEL": "1",
