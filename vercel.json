@@ -3,6 +3,11 @@
   "framework": null,
   "outputDirectory": "public",
   "buildCommand": "npm run build",
+  "build": {
+    "env": {
+      "NOW_PHP_DEBUG": "1"
+    }
+  },
   "builds": [
     {
       "src": "api/*.php",
